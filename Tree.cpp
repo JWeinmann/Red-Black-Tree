@@ -3,11 +3,8 @@
 
 using namespace std;
 
-Node::Node(int data) {
-  this->data = data;
-  colour = RED;
-  left = right = parent = nullptr;
-}
+Node::Node(int data_) : data(data_), colour(RED), left(nullptr), right(nullptr),
+                        parent(nullptr) {}
 
 Tree::Tree() {
   root = nullptr;
