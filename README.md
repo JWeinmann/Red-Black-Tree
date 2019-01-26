@@ -1,5 +1,5 @@
 # Red-Black-Tree - started November 2018
-##Jack Weinmann 
+## Jack Weinmann 
 
 ## Implementation of a Red-Black Tree in C++ (still incomplete)
 
