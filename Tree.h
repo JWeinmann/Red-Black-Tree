@@ -17,22 +17,27 @@ class Tree{
         virtual ~Tree(){};
         void addValue(int);
         Node* insertNode(Node *, Node*);
-        void deleteValue(int);
         void insertFix(Node *);
-        void deleteFix(Node *);
-        void leftRotation(Node *);
-        void rightRotation(Node *);
+        void deleteValue(int);
         Node* findNode(int);
         Node* findNode(Node*, int);
-        void findTest(int);
-        void setColour(Node *, int);
+        Node* findMin(Node*);
+        void deleteFix(Node *);
         int getColour(Node *);
         void transplant(Node*, Node*);
-        Node* successor(Node*);
-        Node* findMin(Node*);
-        Node* findMax(Node*);
+        void setColour(Node *, int);
+        void leftRotation(Node *);
+        void rightRotation(Node *);
         void walk();
         void print(Node*, int);
+
+
+
+        void findTest(int);
+        Node* successor(Node*);
+
+        Node* findMax(Node*);
+
 
     private:
         Node* root;

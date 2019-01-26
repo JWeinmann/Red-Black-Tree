@@ -30,22 +30,6 @@ Node* Tree::insertNode(Node* root, Node* node) {
   return root;
 }
 
-void Tree::deleteValue(int k) {
-  Node* x = findNode(k);
-  Node* y = nullptr;
-  if(x == nullptr){
-    x = nullptr;
-  }else {
-  if(x->right == nullptr)
-    y = x;
-  else {
-    y = findMin(x->right);
-    x->data = y->data;
-  }
-  deleteFix(y);
-}
-}
-
 void Tree::insertFix(Node* node) {
   Node* parent = nullptr;
   Node* grandparent = nullptr;
@@ -89,6 +73,47 @@ void Tree::insertFix(Node* node) {
     }
   }
   setColour(root, BLACK);
+}
+
+void Tree::deleteValue(int k) {
+  Node* x = findNode(k);
+  Node* y = nullptr;
+  if(x == nullptr){
+    x = nullptr;
+  }else {
+  if(x->right == nullptr)
+    y = x;
+  else {
+    // RB Tree will use predecessor version of deletion
+    y = findMin(x->right);
+    x->data = y->data;
+  }
+  deleteFix(y);
+}
+}
+
+Node* Tree::findNode(int k) {
+  return findNode(root,k);
+}
+
+Node* Tree::findNode(Node* x, int k) {
+  if(x->data == k)
+    return x;
+  if (k < x->data) {
+    if(x->left == nullptr)
+      return nullptr;
+    return findNode(x->left, k);
+  } else {
+    if(x->right == nullptr)
+      return nullptr;
+    return findNode(x->right, k);
+  }
+}
+
+Node* Tree::findMin(Node *x) {
+  while (x->left!=nullptr)
+    x = x->left;
+  return x;
 }
 
 void Tree::deleteFix(Node* x) {
@@ -197,6 +222,25 @@ void Tree::deleteFix(Node* x) {
   }
 }
 
+int Tree::getColour(Node* node) {
+  if (node == nullptr)
+    return BLACK;
+  return node->colour;
+}
+
+void Tree::transplant(Node* u, Node* v) {
+  if(u==u->parent->left)
+    u->parent->left = v;
+  else
+    u->parent->right = v;
+}
+
+void Tree::setColour(Node* node, int colour) {
+  if(node == nullptr)
+    return;
+  node ->colour = colour;
+}
+
 void Tree::leftRotation(Node* x) {
   Node* y = x->right;
   x->right = y->left;
@@ -233,72 +277,6 @@ void Tree::rightRotation(Node* x) {
   x->parent = y;
 }
 
-Node* Tree::findNode(int k) {
-  return findNode(root,k);
-}
-
-Node* Tree::findNode(Node* x, int k) {
-  if(x->data == k)
-    return x;
-  if (k < x->data) {
-    if(x->left == nullptr)
-      return nullptr;
-    return findNode(x->left, k);
-  } else {
-    if(x->right == nullptr)
-      return nullptr;
-    return findNode(x->right, k);
-  }
-}
-
-void Tree::findTest(int k) {
-  Node *x = findNode(root,k);
-  //cout << "Node found is: " << x->data << " Left child is: " << x->left->data
-      // << " Right child is: " << x->right->data;
-}
-
-void Tree::setColour(Node* node, int colour) {
-  if(node == nullptr)
-    return;
-  node ->colour = colour;
-}
-
-int Tree::getColour(Node* node) {
-  if (node == nullptr)
-    return BLACK;
-  return node->colour;
-}
-
-void Tree::transplant(Node* u, Node* v) {
-  if(u==u->parent->left)
-    u->parent->left = v;
-  else
-    u->parent->right = v;
-}
-
-Node* Tree::successor(Node *x) {
-  if(x->right != nullptr)
-    return findMin(x->right);
-  Node *y = x->parent;
-  while(y != nullptr) {
-    x = y;
-    y = y->parent;
-  }
-  return y;
-}
-
-Node* Tree::findMin(Node *x) {
-  while (x->left!=nullptr)
-    x = x->left;
-  return x;
-}
-
-Node* Tree::findMax(Node *x) {
-  while (x->right!=nullptr)
-    x = x->right;
-  return x;
-}
-
 void Tree::walk() {
   print(root,1);
 }
@@ -330,4 +308,34 @@ void Tree::print(Node *x, int space) {
   // Process left child
   print(x->left, space);
 
+}
+
+
+
+
+
+// Delete method?
+void Tree::findTest(int k) {
+  Node *x = findNode(root,k);
+  //cout << "Node found is: " << x->data << " Left child is: " << x->left->data
+      // << " Right child is: " << x->right->data;
+}
+
+// Delete method?
+Node* Tree::successor(Node *x) {
+  if(x->right != nullptr)
+    return findMin(x->right);
+  Node *y = x->parent;
+  while(y != nullptr) {
+    x = y;
+    y = y->parent;
+  }
+  return y;
+}
+
+// Delete method?
+Node* Tree::findMax(Node *x) {
+  while (x->right!=nullptr)
+    x = x->right;
+  return x;
 }
