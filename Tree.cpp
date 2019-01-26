@@ -320,7 +320,12 @@ void Tree::print(Node *x, int space) {
   cout << endl;
   for (int i = COUNT; i < space; i++)
     cout << "   ";
-  cout << x->data << "(" << x->colour << ")" << endl;
+  char colour_;
+  if(x->colour == 1)
+    colour_ = 'B';
+  else
+    colour_ = 'R';
+  cout << x->data << "(" << colour_ << ")" << endl;
 
   // Process left child
   print(x->left, space);

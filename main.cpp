@@ -4,12 +4,12 @@
 #include <ratio>
 #include <chrono>
 #include "Tree.h"
- 
+
 using namespace std;
 
 int main()
 {
-   /* Tree t;
+    Tree t;
     cout << "Tree with nothing" << endl;
     t.walk();
     t.addValue(8);
@@ -39,14 +39,14 @@ int main()
     t.deleteValue(6);
     cout << "Delete six" << endl;
     t.walk();
-      t.deleteValue(5);
+    t.deleteValue(5);
     cout << "Delete five" << endl;
     t.walk();
-       t.deleteValue(2);
+      t.deleteValue(2);
     cout << "Delete two" << endl;
     t.walk();
 
-
+/*
     using namespace std::chrono;
     //high_resolution_clock::time_point t1 = high_resolution_clock::now();
 
