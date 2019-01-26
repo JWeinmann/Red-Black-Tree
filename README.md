@@ -1,7 +1,6 @@
 # Red-Black-Tree - started November 2018
+##Jack Weinmann 
 
-
-###Jack Weinmann 
 ## Implementation of a Red-Black Tree in C++ (still incomplete)
 
 This is an implementation of the Red-Black Tree (RBT) data structure in C++. 
@@ -27,7 +26,7 @@ Read-only operations (search, find minimum, find maximum) on Red-Black Trees are
 
 
 
-# INSERTION
+## INSERTION
 
 Below, x denotes the node being inserted, z denotes the node being examined. 
 
