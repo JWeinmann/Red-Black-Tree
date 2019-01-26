@@ -309,33 +309,3 @@ void Tree::print(Node *x, int space) {
   print(x->left, space);
 
 }
-
-
-
-
-
-// Delete method?
-void Tree::findTest(int k) {
-  Node *x = findNode(root,k);
-  //cout << "Node found is: " << x->data << " Left child is: " << x->left->data
-      // << " Right child is: " << x->right->data;
-}
-
-// Delete method?
-Node* Tree::successor(Node *x) {
-  if(x->right != nullptr)
-    return findMin(x->right);
-  Node *y = x->parent;
-  while(y != nullptr) {
-    x = y;
-    y = y->parent;
-  }
-  return y;
-}
-
-// Delete method?
-Node* Tree::findMax(Node *x) {
-  while (x->right!=nullptr)
-    x = x->right;
-  return x;
-}

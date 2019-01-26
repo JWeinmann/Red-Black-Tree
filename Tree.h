@@ -33,10 +33,7 @@ class Tree{
 
 
 
-        void findTest(int);
-        Node* successor(Node*);
 
-        Node* findMax(Node*);
 
 
     private:
