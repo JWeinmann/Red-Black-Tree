@@ -1,6 +1,8 @@
 # Red-Black-Tree - started November 2018
-# Jack Weinmann 
-# Implementation of a Red-Black Tree in C++ (still incomplete)
+
+
+###Jack Weinmann 
+## Implementation of a Red-Black Tree in C++ (still incomplete)
 
 This is an implementation of the Red-Black Tree (RBT) data structure in C++. 
 
