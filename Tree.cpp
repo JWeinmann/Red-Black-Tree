@@ -90,13 +90,13 @@ void Tree::insertFix(Node* currentNode) {
 void Tree::deleteValue(int k) {
   Node* x = findNode(k);
   Node* y = nullptr;
-  if(x == nullptr)
+  if(x == nullptr) // No node with data==k exists
     return;
   else {
   if(x->right == nullptr)
     y = x;
   else {
-    // RB Tree will use predecessor version of deletion
+    // RB Tree will use predecessor version of Red-Black Tree deletion
     y = findMin(x->right);
     x->data = y->data;
   }
