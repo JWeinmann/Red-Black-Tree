@@ -15,6 +15,7 @@ void Tree::addValue(int nodeData) {
   insertFix(node);
 }
 
+// insertNode works its way down the tree and inserts new node in place of leaf
 Node* Tree::insertNode(Node* currentNode, Node* node) {
   // Check if at leaf node or tree is empty
   if (currentNode == nullptr)
