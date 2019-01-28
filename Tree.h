@@ -22,6 +22,7 @@ class Tree{
         Node* findNode(int);
         Node* findNode(Node*, int);
         Node* findMin(Node*);
+        Node* findMax(Node*);
         void deleteFix(Node *);
         int getColour(Node *);
         void transplant(Node*, Node*);

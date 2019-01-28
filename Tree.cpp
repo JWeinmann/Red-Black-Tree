@@ -86,7 +86,7 @@ void Tree::insertFix(Node* currentNode) {
   setColour(root, BLACK);
 }
 
-// Finds node, replaces node data with SUCCESSOR data, then deletes SUCCESSOR ****************** maybe change to predecessor so that it matches the the red-black tree visualizations 
+// Finds node, replaces node data with SUCCESSOR data, then deletes SUCCESSOR ****************** maybe change to predecessor so that it matches the the red-black tree visualizations
 void Tree::deleteValue(int k) {
   Node* x = findNode(k); // findNode returns nullptr if no k exists
   Node* y = nullptr;
@@ -97,7 +97,7 @@ void Tree::deleteValue(int k) {
     y = x;
   else {
     // RB Tree will use SUCCESSOR version of Red-Black Tree deletion
-    y = findMin(x->right); // findMin returns nullptr if no k exists *************** not true
+    y = findMin(x->right);
     x->data = y->data;
   }
   deleteFix(y);
@@ -123,10 +123,16 @@ Node* Tree::findNode(Node* x, int k) {
 }
 
 // Given any node, find the minimum value under it
-Node* Tree::findMin(Node *x) {
-  while (x->left!=nullptr)
-    x = x->left;
-  return x;
+Node* Tree::findMin(Node *n) {
+  while (n->left!=nullptr)
+    n = n->left;
+  return n;
+}
+
+Node* Tree::findMax(Node *n) {
+  while (n->right!=nullptr)
+    n = n->right;
+  return n;
 }
 
 void Tree::deleteFix(Node* x) {
