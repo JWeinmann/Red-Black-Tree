@@ -31,11 +31,11 @@ Node* Tree::insertNode(Node* currentNode, Node* node) {
   return currentNode;
 }
 
-void Tree::insertFix(Node* node) {
+void Tree::insertFix(Node* currentNode) {
   Node* parent = nullptr;
   Node* grandparent = nullptr;
-  while(node != root && getColour(node) == RED && getColour(node->parent) == RED) {
-    parent = node->parent;
+  while(currentNode != root && getColour(currentNode) == RED && getColour(currentNode->parent) == RED) {
+    parent = currentNode->parent;
     grandparent = parent->parent;
     if(parent == grandparent->left) {
       Node* uncle = grandparent->right;
@@ -43,16 +43,16 @@ void Tree::insertFix(Node* node) {
         setColour(uncle, BLACK);
         setColour(parent, BLACK);
         setColour(grandparent, RED);
-        node = grandparent;
+        currentNode = grandparent;
       } else {
-        if(node == parent->right) {
-          node = parent;
+        if(currentNode == parent->right) {
+          currentNode = parent;
           leftRotation(parent);
-          parent = node->parent;
+          parent = currentNode->parent;
         }
         rightRotation(grandparent);
         swap(parent->colour, grandparent->colour);
-        node = parent;
+        currentNode = parent;
       }
     } else {
       Node* uncle = grandparent->left;
@@ -60,16 +60,16 @@ void Tree::insertFix(Node* node) {
         setColour(uncle, BLACK);
         setColour(parent, BLACK);
         setColour(grandparent, RED);
-        node = grandparent;
+        currentNode = grandparent;
       } else {
-        if(node == parent->left) {
-          node = parent;
+        if(currentNode == parent->left) {
+          currentNode = parent;
           rightRotation(parent);
-          parent = node->parent;
+          parent = currentNode->parent;
         }
         leftRotation(grandparent);
         swap(parent->colour, grandparent->colour);
-        node = parent;
+        currentNode = parent;
       }
     }
   }
