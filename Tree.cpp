@@ -86,12 +86,13 @@ void Tree::insertFix(Node* currentNode) {
   setColour(root, BLACK);
 }
 
+// Finds node, replaces node data with predecessor data, then deletes predecessor
 void Tree::deleteValue(int k) {
   Node* x = findNode(k);
   Node* y = nullptr;
-  if(x == nullptr){
-    x = nullptr;
-  }else {
+  if(x == nullptr)
+    return;
+  else {
   if(x->right == nullptr)
     y = x;
   else {
@@ -100,7 +101,7 @@ void Tree::deleteValue(int k) {
     x->data = y->data;
   }
   deleteFix(y);
-}
+  }
 }
 
 Node* Tree::findNode(int k) {
