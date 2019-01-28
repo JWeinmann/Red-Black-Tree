@@ -31,31 +31,39 @@ Node* Tree::insertNode(Node* currentNode, Node* node) {
   return currentNode;
 }
 
+// Restore tree properties
 void Tree::insertFix(Node* currentNode) {
   Node* parent = nullptr;
   Node* grandparent = nullptr;
+  Node* uncle = nullptr;
+  // Check if property 4 is violated, which states that if a node is RED, both
+  // children must be BLACK
   while(currentNode != root && getColour(currentNode) == RED && getColour(currentNode->parent) == RED) {
     parent = currentNode->parent;
     grandparent = parent->parent;
+
     if(parent == grandparent->left) {
-      Node* uncle = grandparent->right;
-      if(getColour(uncle) == RED) {
+      uncle = grandparent->right;
+      if(getColour(uncle) == RED) { // Case 1
         setColour(uncle, BLACK);
         setColour(parent, BLACK);
         setColour(grandparent, RED);
         currentNode = grandparent;
       } else {
-        if(currentNode == parent->right) {
+        if(currentNode == parent->right) { // Case 2
           currentNode = parent;
           leftRotation(parent);
           parent = currentNode->parent;
         }
+        // Case 3
         rightRotation(grandparent);
         swap(parent->colour, grandparent->colour);
         currentNode = parent;
       }
-    } else {
-      Node* uncle = grandparent->left;
+    }
+
+    else {
+      uncle = grandparent->left;
       if(getColour(uncle) == RED) {
         setColour(uncle, BLACK);
         setColour(parent, BLACK);

@@ -32,4 +32,6 @@ Below, x denotes the node being inserted, z denotes the node being examined.
 
 Red-Black Tree insertion begins very much the same as in BST. The key of a node being inserted, x, is compared to the key of the root, z. If x.key is less than z.key, the algorithm moves on to the z.left, otherwise it moves onto z.right. In each case respectively, the new z becomes z.left or z.right, and the algorithm performs the same operation as was done on the root. This continues until the new z is NIL. At this point, x.parent=z.parent, z=x, x.left=NIL, x.right=NIL, and x.colour=RED.
 
+After insertion, property 1, 3, and 5 certainly hold, whereas properties 2 and 4 may not. 
+
 ********* add explanation of insertFixUp, delete, deleteFixUp, etc. 
