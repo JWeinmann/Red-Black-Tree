@@ -109,15 +109,15 @@ Node* Tree::findNode(int k) {
 }
 
 Node* Tree::findNode(Node* x, int k) {
-  if(x->data == k)
+  if(x->data == k) // If at correct node
     return x;
   if (k < x->data) {
     if(x->left == nullptr)
-      return nullptr;
+      return nullptr; // If node doesn't exist
     return findNode(x->left, k);
   } else {
     if(x->right == nullptr)
-      return nullptr;
+      return nullptr; // // If node doesn't exist
     return findNode(x->right, k);
   }
 }
@@ -129,6 +129,7 @@ Node* Tree::findMin(Node *n) {
   return n;
 }
 
+// Given any node, find the maximum value under it
 Node* Tree::findMax(Node *n) {
   while (n->right!=nullptr)
     n = n->right;
