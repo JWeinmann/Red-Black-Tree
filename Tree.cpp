@@ -3,8 +3,7 @@
 using namespace std;
 
 // In RB trees, every node is added as RED and properties are fixed in insertFix()
-Node::Node(int data_) : data(data_), colour(RED), left(nullptr), right(nullptr),
-                        parent(nullptr) {}
+Node::Node(int data_) : data(data_), colour(RED), left(nullptr), right(nullptr), parent(nullptr) {}
 
 Tree::Tree() : root(nullptr) {}
 
@@ -69,7 +68,8 @@ void Tree::insertFix(Node* currentNode) {
         setColour(parent, BLACK);
         setColour(grandparent, RED);
         currentNode = grandparent;
-      } else {
+      }
+      else {
         if(currentNode == parent->left) { // Case 2
           currentNode = parent;
           rightRotation(parent);
@@ -93,13 +93,13 @@ void Tree::deleteValue(int k) {
   if(x == nullptr) // True if no node with data==k exists
     return;
   else {
-  if(x->right == nullptr)
-    y = x;
-  else {
-    // RB Tree will use SUCCESSOR version of Red-Black Tree deletion
-    y = findMin(x->right);
-    x->data = y->data;
-  }
+    if(x->right == nullptr)
+      y = x;
+    else {
+      // RB Tree will use SUCCESSOR version of Red-Black Tree deletion
+      y = findMax(x->left);
+      x->data = y->data;
+    }
   deleteFix(y);
   }
 }
