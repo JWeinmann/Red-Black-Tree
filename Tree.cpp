@@ -86,7 +86,7 @@ void Tree::insertFix(Node* currentNode) {
   setColour(root, BLACK);
 }
 
-// Finds node, replaces node data with predecessor data, then deletes predecessor   ************ does it use predecessor? Or does it use successor? 
+// Finds node, replaces node data with SUCCESSOR data, then deletes SUCCESSOR ****************** maybe change to predecessor so that it matches the the red-black tree visualizations 
 void Tree::deleteValue(int k) {
   Node* x = findNode(k); // findNode returns nullptr if no k exists
   Node* y = nullptr;
@@ -96,8 +96,8 @@ void Tree::deleteValue(int k) {
   if(x->right == nullptr)
     y = x;
   else {
-    // RB Tree will use predecessor version of Red-Black Tree deletion
-    y = findMin(x->right); // findMin returns nullptr if no k exists
+    // RB Tree will use SUCCESSOR version of Red-Black Tree deletion
+    y = findMin(x->right); // findMin returns nullptr if no k exists *************** not true
     x->data = y->data;
   }
   deleteFix(y);
