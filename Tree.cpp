@@ -9,25 +9,25 @@ Node::Node(int data_) : data(data_), colour(RED), left(nullptr), right(nullptr),
 
 Tree::Tree() : root(nullptr) {}
 
-void Tree::addValue(int n) {
-  Node *node = new Node(n);
+void Tree::addValue(int nodeData) {
+  Node *node = new Node(nodeData);
   root = insertNode(root, node);
   insertFix(node);
 }
 
-Node* Tree::insertNode(Node* root, Node* node) {
-  // If tree is empty
-  if (root == nullptr)
+Node* Tree::insertNode(Node* currentNode, Node* node) {
+  // Check if at leaf node or tree is empty
+  if (currentNode == nullptr)
     return node;
 
-  if(node->data < root->data) {
-    root->left = insertNode(root->left, node);
-    root->left->parent = root;
-  } else if (node->data > root->data) {
-    root->right = insertNode(root->right, node);
-    root->right->parent = root;
+  if(node->data < currentNode->data) {
+    currentNode->left = insertNode(currentNode->left, node);
+    currentNode->left->parent = currentNode;
+  } else if (node->data > currentNode->data) {
+    currentNode->right = insertNode(currentNode->right, node);
+    currentNode->right->parent = currentNode;
   }
-  return root;
+  return currentNode;
 }
 
 void Tree::insertFix(Node* node) {
