@@ -86,18 +86,18 @@ void Tree::insertFix(Node* currentNode) {
   setColour(root, BLACK);
 }
 
-// Finds node, replaces node data with predecessor data, then deletes predecessor
+// Finds node, replaces node data with predecessor data, then deletes predecessor   ************ does it use predecessor? Or does it use successor? 
 void Tree::deleteValue(int k) {
-  Node* x = findNode(k);
+  Node* x = findNode(k); // findNode returns nullptr if no k exists
   Node* y = nullptr;
-  if(x == nullptr) // No node with data==k exists
+  if(x == nullptr) // True if no node with data==k exists
     return;
   else {
   if(x->right == nullptr)
     y = x;
   else {
     // RB Tree will use predecessor version of Red-Black Tree deletion
-    y = findMin(x->right);
+    y = findMin(x->right); // findMin returns nullptr if no k exists
     x->data = y->data;
   }
   deleteFix(y);
@@ -122,6 +122,7 @@ Node* Tree::findNode(Node* x, int k) {
   }
 }
 
+// Given any node, find the minimum value under it
 Node* Tree::findMin(Node *x) {
   while (x->left!=nullptr)
     x = x->left;
