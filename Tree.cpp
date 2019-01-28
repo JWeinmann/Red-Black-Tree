@@ -1,6 +1,5 @@
 #include "Tree.h"
-#include <bits/stdc++.h>
-
+#include <iostream>
 using namespace std;
 
 // In RB trees, every node is added as RED and properties are fixed in insertFix()
@@ -41,7 +40,7 @@ void Tree::insertFix(Node* currentNode) {
   while(currentNode != root && getColour(currentNode) == RED && getColour(currentNode->parent) == RED) {
     parent = currentNode->parent;
     grandparent = parent->parent;
-
+    // Left versions of cases 1-3
     if(parent == grandparent->left) {
       uncle = grandparent->right;
       if(getColour(uncle) == RED) { // Case 1
@@ -57,26 +56,29 @@ void Tree::insertFix(Node* currentNode) {
         }
         // Case 3
         rightRotation(grandparent);
-        swap(parent->colour, grandparent->colour);
+        setColour(parent, BLACK);
+        setColour(grandparent, RED);
         currentNode = parent;
       }
     }
-
+    // Right versions of cases 1-3
     else {
       uncle = grandparent->left;
-      if(getColour(uncle) == RED) {
+      if(getColour(uncle) == RED) { // Case 1
         setColour(uncle, BLACK);
         setColour(parent, BLACK);
         setColour(grandparent, RED);
         currentNode = grandparent;
       } else {
-        if(currentNode == parent->left) {
+        if(currentNode == parent->left) { // Case 2
           currentNode = parent;
           rightRotation(parent);
           parent = currentNode->parent;
         }
+        // Case 3
         leftRotation(grandparent);
-        swap(parent->colour, grandparent->colour);
+        setColour(parent, BLACK);
+        setColour(grandparent, RED);
         currentNode = parent;
       }
     }
