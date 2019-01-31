@@ -4,10 +4,24 @@
 enum colour {RED, BLACK, DOUBLEBLACK};
 
 struct Node{
+ private:
     int data;
     int colour;
     Node *left, *right, *parent;
+ public:
     explicit Node(int);
+    Node();
+    ~Node(){};
+    void setData(int);
+    void setLeft(Node*);
+    void setRight(Node*);
+    void setParent(Node*);
+    void setColour(int);
+    int getData();
+    Node* getLeft();
+    Node* getRight();
+    Node* getParent();
+    int getColour();
 };
 
 class Tree{

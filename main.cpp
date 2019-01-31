@@ -10,6 +10,10 @@ using namespace std;
 int main()
 {
     Tree t;
-
+    Node n;
+    Node *nodeptr = new Node();
+    cout << "here: " << nodeptr->getData();
+    nodeptr->setData(5);
+    cout << "\nhere: " << nodeptr->getData();
     return 0;
 }
