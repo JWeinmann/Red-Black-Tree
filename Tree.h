@@ -35,6 +35,8 @@ class Tree{
         Node* predecessor(Node*);
         void leftRotation(Node*);
         void rightRotation(Node*);
+        Node* findNode(int);
+        Node* findNode(Node*,int);
         void walk();
         void print(Node*,int);
 

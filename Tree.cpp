@@ -119,10 +119,11 @@ Node* Tree::predecessor(Node* node) {
 
 // Perform just a normal binary search tree left rotation
 void Tree::leftRotation(Node* x) {
+  if(x->getRight() == nil)
+    return;
   Node* y = x->getRight();
   x->setRight(y->getLeft());
-  if(x->getRight() != nil)
-    x->getRight()->setParent(x);
+  x->getRight()->setParent(x);
   y->setParent(x->getParent());
 
   if(x->getParent() == nil)
@@ -153,6 +154,23 @@ void Tree::rightRotation(Node* x) {
   x->setParent(y);
 }
 
+Node* Tree::findNode(int k) {
+  return findNode(root,k);
+}
+
+Node* Tree::findNode(Node* x,int k) {
+  if(x->getData() == k) // If at correct node
+    return x;
+  if (k < x->getData()) {
+    if(x->getLeft() == nil)
+      return nil; // If node doesn't exist
+    return findNode(x->getLeft(), k);
+  } else {
+    if(x->getRight() == nil)
+      return nil; // If node doesn't exist
+    return findNode(x->getRight(), k);
+  }
+}
 
 void Tree::walk() {
   print(root,1);
