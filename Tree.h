@@ -30,9 +30,8 @@ class Tree{
         Tree();
         virtual ~Tree(){};
         void addValue(int);
-
-
-
+        void setLeaf(Node*); // point children to nil
+        
 
     private:
         Node* root;

@@ -9,27 +9,22 @@ Node::Node(int data_) : data(data_), colour(RED), left(nullptr), right(nullptr),
 
 void Node::setData(int key) {
   data = key;
-  return;
 }
 
 void Node::setLeft(Node* node) {
   left = node;
-  return;
 }
 
 void Node::setRight(Node* node) {
   right = node;
-  return;
 }
 
 void Node::setParent(Node* node) {
   parent = node;
-  return;
 }
 
 void Node::setColour(int newColour) {
   colour = newColour;
-  return;
 }
 
 int Node::getData() {
@@ -52,8 +47,50 @@ int Node::getColour() {
   return colour;
 }
 
+// New tree
 Tree::Tree() : root(nullptr), nil(nullptr) {
   Node* node = new Node();
   nil = node;
   nil->setColour(BLACK);
+  nil->setParent(nullptr);
+  nil->setLeft(nullptr);
+  nil->setRight(nullptr);
+  root = nil;
+}
+
+// Point children of node to nil
+void Tree::setLeaf(Node* node) {
+  node->setLeft(nil);
+  node->setRight(nil);
+}
+
+void Tree::addValue(int key) {
+  Node* node = new Node(key);
+  node->setData(key);
+
+  Node* xNode = root;
+  Node* yNode = root;
+  // Iterate down the tree until proper spot found
+  while(xNode != nil) {
+    yNode = xNode;
+    if(key < xNode->getData())
+      xNode = xNode->getLeft();
+    else
+      xNode = xNode->getRight();
+  }
+  // If tree is empty
+  if(yNode == nil){
+    root = node;
+    root->setColour(BLACK);
+    setLeaf(root);
+  }
+  else if(key < yNode->getData()){
+    yNode->setLeft(node);
+    setLeaf(node);
+  }
+  else{
+    yNode->setRight(node);
+    setLeaf(node);
+  }
+  // ******** when implemented call fix on node
 }
