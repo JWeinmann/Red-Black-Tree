@@ -31,7 +31,8 @@ class Tree{
         virtual ~Tree(){};
         void addValue(int);
         void setLeaf(Node*); // point children to nil
-        
+        Node* successor(Node*); // return successor of given node
+        Node* predecessor(Node*);
 
     private:
         Node* root;

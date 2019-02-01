@@ -94,3 +94,25 @@ void Tree::addValue(int key) {
   }
   // ******** when implemented call fix on node
 }
+
+Node* Tree::successor(Node* node) {
+  Node* xNode = node->getRight();
+  Node* yNode = xNode;
+  while(xNode != nil) {
+    yNode = xNode;
+    if(yNode->getLeft() != nil)
+      xNode = yNode->getLeft();
+  }
+  return yNode;
+}
+
+Node* Tree::predecessor(Node* node) {
+  Node* xNode = node->getLeft();
+  Node* yNode = xNode;
+  while(xNode != nil) {
+    yNode = xNode;
+    if(yNode->getRight() != nil)
+      xNode = yNode->getRight();
+  }
+  return yNode;
+}
