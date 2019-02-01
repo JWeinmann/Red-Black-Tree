@@ -118,37 +118,52 @@ Node* Tree::predecessor(Node* node) {
 }
 
 void Tree::leftRotation(Node* x) {
-  Node* y = x->right;
-  x->right = y->left;
-  if(x->right != nullptr)
-    x->right->parent = x;
-  y->parent = x->parent;
+  Node* y = x->getRight();
+  x->setRight(y->getLeft());
+  if(x->getRight() != nil)
+    x->getRight()->setParent(x);
+  y->setParent(x->getParent());
 
-  if(x->parent == nullptr)
+  if(x->getParent() == nil)
     root = y;
-  else if(x == x->parent->left)
-    x->parent->left = y;
+  else if(x == x->getParent()->getLeft())
+    x->getParent()->setLeft(y);
   else
-    x->parent->right = y;
+    x->getParent()->setRight(y);
 
-  y->left = x;
-  x->parent = y;
+  y->setLeft(x);
+  x->setParent(y);
 }
 
-void Tree::rightRotation(Node* x) {
-  Node* y = x->left;
-  x->left = y->right;
-  if(x->left != nullptr)
-    x->left->parent = x;
-  y->parent = x->parent;
+void Tree::walk() {
+  print(root,1);
+}
 
-  if(x->parent == nullptr)
-    root = y;
-  else if(x == x->parent->left)
-    x->parent->left = y;
+void Tree::print(Node *x, int space) {
+  // Base case
+  if (x == nil)
+    return;
+  int COUNT = 1;
+  if(COUNT == -1)
+    COUNT = 1;
+  space += COUNT;
+
+  // Process right child first
+  print(x->getRight(), space);
+
+  // Print current node after space
+  // count
+  cout << endl;
+  for (int i = COUNT; i < space; i++)
+    cout << "   ";
+  char colour_;
+  if(x->getColour() == 1)
+    colour_ = 'B';
   else
-    x->parent->right = y;
+    colour_ = 'R';
+  cout << x->getData() << "(" << colour_ << ")" << endl;
 
-  y->right = x;
-  x->parent = y;
+  // Process left child
+  print(x->getLeft(), space);
+
 }

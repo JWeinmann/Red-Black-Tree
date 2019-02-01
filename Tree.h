@@ -34,7 +34,9 @@ class Tree{
         Node* successor(Node*); // return successor of given node
         Node* predecessor(Node*);
         void leftRotation(Node*);
-        void rightRotation(Node*);
+        //void rightRotation(Node*);
+        void walk();
+        void print(Node*,int);
 
     private:
         Node* root;
