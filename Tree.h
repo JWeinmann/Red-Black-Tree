@@ -33,6 +33,8 @@ class Tree{
         void setLeaf(Node*); // point children to nil
         Node* successor(Node*); // return successor of given node
         Node* predecessor(Node*);
+        void leftRotation(Node*);
+        void rightRotation(Node*);
 
     private:
         Node* root;

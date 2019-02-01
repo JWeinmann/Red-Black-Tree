@@ -116,3 +116,39 @@ Node* Tree::predecessor(Node* node) {
   }
   return yNode;
 }
+
+void Tree::leftRotation(Node* x) {
+  Node* y = x->right;
+  x->right = y->left;
+  if(x->right != nullptr)
+    x->right->parent = x;
+  y->parent = x->parent;
+
+  if(x->parent == nullptr)
+    root = y;
+  else if(x == x->parent->left)
+    x->parent->left = y;
+  else
+    x->parent->right = y;
+
+  y->left = x;
+  x->parent = y;
+}
+
+void Tree::rightRotation(Node* x) {
+  Node* y = x->left;
+  x->left = y->right;
+  if(x->left != nullptr)
+    x->left->parent = x;
+  y->parent = x->parent;
+
+  if(x->parent == nullptr)
+    root = y;
+  else if(x == x->parent->left)
+    x->parent->left = y;
+  else
+    x->parent->right = y;
+
+  y->right = x;
+  x->parent = y;
+}
