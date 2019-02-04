@@ -123,15 +123,16 @@ void Tree::leftRotation(Node* x) {
     return;
   Node* y = x->getRight();
   x->setRight(y->getLeft());
-  x->getRight()->setParent(x);
+  if(y->getLeft() != nil)
+    y->getLeft()->setParent(x);
   y->setParent(x->getParent());
 
   if(x->getParent() == nil)
     root = y;
-  else if(x == x->getParent()->getLeft())
+  else if(x == x->getParent()->getLeft()) // *************
     x->getParent()->setLeft(y);
   else
-    x->getParent()->setRight(y);
+    x->getParent()->setRight(y); // ************
   y->setLeft(x);
   x->setParent(y);
 }

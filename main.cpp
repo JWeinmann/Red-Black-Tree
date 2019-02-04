@@ -24,7 +24,7 @@ int main()
     t.addValue(2);
     t.walk();
     cout << "here: " << t.findNode(33)->getData();
-    t.leftRotation(t.findNode(33));
+    t.leftRotation(t.findNode(43));
     t.walk();
     return 0;
 }
