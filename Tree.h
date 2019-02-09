@@ -42,7 +42,7 @@ class Tree{
 
     private:
         Node* root;
-        Node* nil;
+        Node* nil; // nil parent only matters within specific methods and only for the duration of that method
 
 };
 
