@@ -26,5 +26,7 @@ int main()
     cout << "here: " << t.findNode(33)->getData();
     t.leftRotation(t.findNode(43));
     t.walk();
+    t.rightRotation(t.findNode(20));
+    t.walk();
     return 0;
 }

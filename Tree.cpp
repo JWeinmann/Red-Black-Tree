@@ -122,19 +122,18 @@ Node* Tree::predecessor(Node* node) {
 }
 
 // Perform just a normal binary search tree left rotation
-//******** there's a bug here but I can't find it
 void Tree::leftRotation(Node* x) {
+  // invalid rotation
   if(x->getRight() == nil)
     return;
   Node* y = x->getRight();
   if(y->getLeft() == nil)
     x->setRight(nil);
-  else
+  else{
     x->setRight(y->getLeft());
-  if(y->getLeft() != nil)
     y->getLeft()->setParent(x);
+  }
   y->setParent(x->getParent());
-
   if(x->getParent() == nil)
     root = y;
   else if(x == x->getParent()->getLeft()) //
@@ -145,17 +144,22 @@ void Tree::leftRotation(Node* x) {
   x->setParent(y);
 }
 
-// Normal binary search tree right rotation
+// Perform just a normal binary search tree left rotation
 void Tree::rightRotation(Node* x) {
+  // invalid rotation
+  if(x->getLeft() == nil)
+    return;
   Node* y = x->getLeft();
-  x->setLeft(y->getRight());
-  if(x->getLeft() != nil)
-    x->getLeft()->setParent(x);
+  if(y->getRight() == nil)
+    x->setLeft(nil);
+  else{
+    x->setLeft(y->getRight());
+    y->getRight()->setParent(x);
+  }
   y->setParent(x->getParent());
-
   if(x->getParent() == nil)
     root = y;
-  else if(x == x->getParent()->getRight())
+  else if(x == x->getParent()->getRight()) //
     x->getParent()->setRight(y);
   else
     x->getParent()->setLeft(y);
