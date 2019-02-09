@@ -83,14 +83,18 @@ void Tree::addValue(int key) {
     root = node;
     root->setColour(BLACK);
     setLeaf(root);
+    root->setParent(nil);
   }
+  // Tree isn't empty
   else if(key < yNode->getData()){
     yNode->setLeft(node);
     setLeaf(node);
+    node->setParent(yNode);
   }
   else{
     yNode->setRight(node);
     setLeaf(node);
+    node->setParent(yNode);
   }
   // ******** when implemented call fix on node
 }
@@ -118,6 +122,7 @@ Node* Tree::predecessor(Node* node) {
 }
 
 // Perform just a normal binary search tree left rotation
+//******** there's a bug here but I can't find it
 void Tree::leftRotation(Node* x) {
   if(x->getRight() == nil)
     return;
@@ -132,10 +137,10 @@ void Tree::leftRotation(Node* x) {
 
   if(x->getParent() == nil)
     root = y;
-  else if(x == x->getParent()->getLeft()) // *************
+  else if(x == x->getParent()->getLeft()) //
     x->getParent()->setLeft(y);
   else
-    x->getParent()->setRight(y); // ************
+    x->getParent()->setRight(y);
   y->setLeft(x);
   x->setParent(y);
 }

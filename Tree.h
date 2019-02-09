@@ -4,7 +4,8 @@
 enum colour {RED, BLACK, DOUBLEBLACK};
 
 struct Node{
- private:
+ //private:
+public:
     int data;
     int colour;
     Node *left, *right, *parent;
