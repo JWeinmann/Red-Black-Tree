@@ -96,7 +96,48 @@ void Tree::addValue(int key) {
     setLeaf(node);
     node->setParent(yNode);
   }
-  // ******** when implemented call fix on node
+  insertFix(node);
+}
+
+void Tree::insertFix(Node* node) {
+  Node* y = nullptr;
+  while(node->getParent()->getColour() == RED) {
+    if(node->getParent() == node->getParent()->getParent()->getLeft()) {
+      y = node->getParent()->getParent()->getRight();
+
+      if(y->getColour() == RED) {
+        node->getParent()->setColour(BLACK);
+        y->setColour(BLACK);
+        node->getParent()->getParent()->setColour(RED);
+        node = node->getParent()->getParent();
+      }
+      else if(node = node->getParent()->getRight()){
+        node = node->getParent();
+        leftRotation(node);
+      }
+      node->getParent()->setColour(BLACK);
+      node->getParent()->getParent()->setColour(RED);
+      rightRotation(node->getParent()->getParent());
+    }
+    else {
+      y = node->getParent()->getParent()->getLeft();
+
+      if(y->getColour() == RED) {
+        node->getParent()->setColour(BLACK);
+        y->setColour(BLACK);
+        node->getParent()->getParent()->setColour(RED);
+        node = node->getParent()->getParent();
+      }
+      else if(node = node->getParent()->getLeft()){
+        node = node->getParent();
+        rightRotation(node);
+      }
+      node->getParent()->setColour(BLACK);
+      node->getParent()->getParent()->setColour(RED);
+      leftRotation(node->getParent()->getParent());
+    }
+  }
+  root->setColour(BLACK);
 }
 
 Node* Tree::successor(Node* node) {
@@ -121,7 +162,6 @@ Node* Tree::predecessor(Node* node) {
   return yNode;
 }
 
-// Perform just a normal binary search tree left rotation
 void Tree::leftRotation(Node* x) {
   // invalid rotation
   if(x->getRight() == nil)
@@ -144,7 +184,6 @@ void Tree::leftRotation(Node* x) {
   x->setParent(y);
 }
 
-// Perform just a normal binary search tree left rotation
 void Tree::rightRotation(Node* x) {
   // invalid rotation
   if(x->getLeft() == nil)
@@ -215,5 +254,4 @@ void Tree::print(Node *x, int space) {
 
   // Process left child
   print(x->getLeft(), space);
-
 }
