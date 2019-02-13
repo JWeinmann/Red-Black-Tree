@@ -84,6 +84,9 @@ void Tree::addValue(int key) {
     root->setColour(BLACK);
     setLeaf(root);
     root->setParent(nil);
+    nil->setLeft(root);
+    nil->setRight(root);
+    nil->setColour(BLACK);
   }
   // Tree isn't empty
   else if(key < yNode->getData()){
@@ -96,45 +99,53 @@ void Tree::addValue(int key) {
     setLeaf(node);
     node->setParent(yNode);
   }
+  setLeaf(node);
   insertFix(node);
 }
 
+
+
 void Tree::insertFix(Node* node) {
   Node* y = nullptr;
-  while(node->getParent()->getColour() == RED) {
+  while(node->getParent()->getColour() == RED && node->getColour() == RED) {
     if(node->getParent() == node->getParent()->getParent()->getLeft()) {
-      y = node->getParent()->getParent()->getRight();
-
+      y = node->getParent()->getParent()->getRight(); // fails on addValue 20 after calling print y->getColour()
       if(y->getColour() == RED) {
         node->getParent()->setColour(BLACK);
         y->setColour(BLACK);
         node->getParent()->getParent()->setColour(RED);
         node = node->getParent()->getParent();
       }
-      else if(node = node->getParent()->getRight()){
+      else {
+
+        if(node = node->getParent()->getRight()){
+          node = node->getParent();
+          leftRotation(node);
+        }
+        node->getParent()->setColour(BLACK);
+        node->getParent()->getParent()->setColour(RED);
+        rightRotation(node->getParent()->getParent());
         node = node->getParent();
-        leftRotation(node);
       }
-      node->getParent()->setColour(BLACK);
-      node->getParent()->getParent()->setColour(RED);
-      rightRotation(node->getParent()->getParent());
     }
     else {
       y = node->getParent()->getParent()->getLeft();
-
       if(y->getColour() == RED) {
         node->getParent()->setColour(BLACK);
         y->setColour(BLACK);
         node->getParent()->getParent()->setColour(RED);
         node = node->getParent()->getParent();
       }
-      else if(node = node->getParent()->getLeft()){
+      else {
+        if(node = node->getParent()->getLeft()){
+          node = node->getParent();
+          rightRotation(node);
+        }
+        node->getParent()->setColour(BLACK);
+        node->getParent()->getParent()->setColour(RED);
+        leftRotation(node->getParent()->getParent());
         node = node->getParent();
-        rightRotation(node);
       }
-      node->getParent()->setColour(BLACK);
-      node->getParent()->getParent()->setColour(RED);
-      leftRotation(node->getParent()->getParent());
     }
   }
   root->setColour(BLACK);
@@ -226,6 +237,7 @@ Node* Tree::findNode(Node* x,int k) {
 
 void Tree::walk() {
   print(root,1);
+  cout << "\n\n________________________________________________________________________\n\n";
 }
 
 void Tree::print(Node *x, int space) {
